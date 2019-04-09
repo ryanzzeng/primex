@@ -4,7 +4,7 @@
 > Last edited by Ryan Zeng 9 April. 2019
 
 ### Getting Started
-This project is built based on Lumen Framework and Mysql. These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. 
+This project is built based on Lumen Framework&Mysql with repository pattern.Core logic code is in app\Core folder. These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. 
 
 #### Prerequisites
 What things you need to install to run the project and how to install them.
@@ -40,6 +40,13 @@ What things you need to install to run the project and how to install them.
 ````
 - php -S localhost:8000 -t public
 ````
+
+### API Endpoint(Local environment) URL Example
+* GET http://localhost:8000/v1/users/list
+* POST http://localhost:8000/v1/users/create
+* POST http://localhost:8000/v1/users/update
+* POST http://localhost:8000/v1/users/show
+* POST http://localhost:8000/v1/users/delete
 
 ### Unit Test for User Api
 * In project repository folder, run the following commands to Test all the API.
