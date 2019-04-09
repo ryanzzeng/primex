@@ -115,7 +115,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
      * @param int $perPage
      * @return LengthAwarePaginator
      */
-    public function paginateArrayResults(array $data, int $perPage = 50)
+    public function paginateArrayResults(array $data, int $perPage = 10)
     {
         $page = request()->get('page', 1);
         $offset = ($page * $perPage) - $perPage;
@@ -138,6 +138,6 @@ abstract class BaseRepository implements BaseRepositoryInterface
      */
     public function delete(int $id) : bool
     {
-        return $this->model->find($id)->update(['disbale' => 1]);
+        return $this->model->find($id)->delete();
     }
 }

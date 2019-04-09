@@ -24,7 +24,7 @@ class UpdateUserRequest extends BaseFormRequest
         return [
             'user_id' => ['required','exists:users,id'],
             'role_id' => ['exists:roles,id'],
-            'email' => ['email'],
+            'email' => ['email','unique:users,email'],
         ];
     }
 

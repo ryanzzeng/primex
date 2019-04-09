@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Http\Requests\FormRequest;
+use App\Core\Base\FormRequest;
 use Illuminate\Support\ServiceProvider;
 use Symfony\Component\HttpFoundation\Request;
 use Illuminate\Contracts\Validation\ValidatesWhenResolved;

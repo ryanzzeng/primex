@@ -16,9 +16,8 @@ class UsersTableSeeder extends Seeder
 
         $this->command->info("Creating {$count} users.");
 
-        // Create the User
         $users = factory(App\Core\Users\User::class, $count)->create();
 
-        $this->command->info('Users Created!');
+        $this->command->info("Creating users complete.");
     }
 }

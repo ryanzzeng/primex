@@ -35,6 +35,7 @@ class GeneralUserRequest extends BaseFormRequest
     public function messages()
     {
         return [
+            'user_id.required' => 'The :attribute field is missing',
             'user_id.exists' => 'Invalid user id',
         ];
     }

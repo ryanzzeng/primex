@@ -2,13 +2,14 @@
 
 namespace App\Core\Users\Repositories\Interfaces;
 
-use App\Core\Base\Interfaces\BaseRepositoryInterface;
 use App\Core\Users\User;
 use Illuminate\Support\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
+use App\Core\Base\Interfaces\BaseRepositoryInterface;
 
 interface UserRepositoryInterface extends BaseRepositoryInterface
 {
-    public function listUsers() : Collection;
+    public function listUsers(int $perPage = 10):LengthAwarePaginator;
 
     public function createUser(array $data) : User;
 

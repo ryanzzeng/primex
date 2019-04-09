@@ -25,9 +25,8 @@ class CreateUserRequest extends BaseFormRequest
         return [
             'name' => ['required'],
             'password' => ['required'],
-            'email' => ['required','unique:users'],
+            'email' => ['required','email','unique:users'],
             'role_id' => ['required','exists:roles,id'],
-            'created_by' => ['required','exists:users,username'],
         ];
     }
 
@@ -39,9 +38,7 @@ class CreateUserRequest extends BaseFormRequest
     public function messages()
     {
         return [
-            'email.unique' => 'Duplicate email is not allowed.',
             'role_id.exists' => 'Role is not existed.',
-            'created_by.exists' => 'Invalid user operation.',
         ];
     }
 }

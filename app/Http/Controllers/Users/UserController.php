@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Core\Users\User;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Responses\HttpResponse;
 use App\Core\Users\Requests\CreateUserRequest;
@@ -23,9 +24,10 @@ class UserController extends Controller
         $this->UserRepo = $UserRepository;
     }
 
-    public function list()
+    public function list(Request $request)
     {
-        $users = $this->UserRepo->listUsers();
+        $perPage = $request->get('perPage', 10);
+        $users = $this->UserRepo->listUsers($perPage);
         return HttpResponse::success(array($users), 'List users successfully!');
     }
 

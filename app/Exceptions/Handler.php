@@ -3,11 +3,15 @@
 namespace App\Exceptions;
 
 use Exception;
+use App\Http\Responses\HttpResponse;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Laravel\Lumen\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use App\Core\Users\Exceptions\UserInvalidArgumentException;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -45,6 +49,37 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        $data = [
+            'request_uri' => $request->getUri(),
+            'parameters' => $request->all()
+        ];
+
+        if ($exception instanceof UserInvalidArgumentException) {
+            throw HttpResponse::fail(40001, $data);
+        }
+
+        if($exception instanceof ValidationException){
+            throw HttpResponse::fail(40002, json_decode($exception->getResponse(),true),$exception->getMessage());
+        }
+
+        if($exception instanceof NotFoundHttpException){
+            throw HttpResponse::fail(40401,$data);
+        }
+
+        if ($exception instanceof HttpResponseException) {
+            return $exception->getResponse();
+        }
+
+        if($exception){
+            $data = [
+                'message' => $exception->getMessage(),
+                'exception class' => get_class($exception),
+                'exception code' => $exception->getCode(),
+                'file' => $exception->getFile(),
+                'line' => $exception->getLine(),
+            ];
+            throw HttpResponse::fail(50000,$data);
+        }
         return parent::render($request, $exception);
     }
 }
