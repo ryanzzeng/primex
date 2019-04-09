@@ -1,9 +1,10 @@
 ## User and Role Management API
 > Primex technical test with Lumen Framework - User and Role Management API
+>
 > Last edited by Ryan Zeng 9 April. 2019
 
 ### Getting Started
-This project is built based on Lumen Framework and Mysql. These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+This project is built based on Lumen Framework and Mysql. These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. 
 
 #### Prerequisites
 What things you need to install to run the project and how to install them.
@@ -44,7 +45,7 @@ What things you need to install to run the project and how to install them.
 * In project repository folder, run the following commands to Test all the API.
 * This section will test all the api for successful request  and test the exception situation.
 ````
-vendor/bin/phpunit
+- vendor/bin/phpunit
 ````
 
 ## Authors
