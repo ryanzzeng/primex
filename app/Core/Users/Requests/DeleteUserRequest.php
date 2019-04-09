@@ -24,6 +24,7 @@ class DeleteUserRequest extends BaseFormRequest
     {
         $rules = [
             'user_ids' => ['required','array'],
+            'user_ids.*' => ['required','exists:users,id']
         ];
         return $rules;
     }
@@ -36,7 +37,8 @@ class DeleteUserRequest extends BaseFormRequest
     public function messages()
     {
         return [
-            'user_ids.required' => 'The :attribute field is missing',
+            'user_ids.required' => 'The :attribute field is missing.',
+            'user_ids.*.exists' => 'The :attribute is invalid.'
         ];
     }
 }
