@@ -74,10 +74,10 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
      * @param int $id
      * @return bool
      */
-    public function deleteUser(int $id):bool
+    public function deleteUser(array $ids):bool
     {
         try{
-            $this->delete($id);
+            User::whereIn('id',$ids)->delete();
         }catch (QueryException $e) {
             throw new UserInvalidArgumentException($e->getMessage());
         }

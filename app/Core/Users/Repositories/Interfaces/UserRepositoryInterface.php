@@ -15,7 +15,7 @@ interface UserRepositoryInterface extends BaseRepositoryInterface
 
     public function updateUser(array $params, int $id) : bool;
 
-    public function deleteUser(int $id):bool;
+    public function deleteUser(array $ids):bool;
 
     public function showUser(int $id):Collection;
 }

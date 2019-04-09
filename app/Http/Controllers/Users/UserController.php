@@ -8,7 +8,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Responses\HttpResponse;
 use App\Core\Users\Requests\CreateUserRequest;
 use App\Core\Users\Requests\UpdateUserRequest;
-use App\Core\Users\Requests\GeneralUserRequest;
+use App\Core\Users\Requests\ShowUserRequest;
+use App\Core\Users\Requests\DeleteUserRequest;
 use App\Core\Users\Repositories\Interfaces\UserRepositoryInterface;
 
 class UserController extends Controller
@@ -60,24 +61,24 @@ class UserController extends Controller
     }
 
     /**
-     * @param GeneralUserRequest $request
+     * @param DeleteUserRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function delete(GeneralUserRequest $request)
+    public function delete(DeleteUserRequest $request)
     {
-        $status = $this->UserRepo->deleteUser($request->user_id);
+        $status = $this->UserRepo->deleteUser($request->user_ids);
         $data = [
-            'user_id' => $request->user_id,
+            'user_id' => $request->user_ids,
             'status' => $status
         ];
         return HttpResponse::success($data, 'Delete user successfully!');
     }
 
     /**
-     * @param GeneralUserRequest $request
+     * @param ShowUserRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function show(GeneralUserRequest $request)
+    public function show(ShowUserRequest $request)
     {
         $user = $this->UserRepo->showUser($request->user_id);
         return HttpResponse::success(array($user), 'Show user successfully!');
