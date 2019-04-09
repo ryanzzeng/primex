@@ -2,6 +2,7 @@
 
 use App\Core\Users\User;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 use Laravel\Lumen\Testing\DatabaseMigrations;
 use Laravel\Lumen\Testing\DatabaseTransactions;
 
@@ -56,9 +57,13 @@ class UsersTest extends TestCase
 
     public function testDeleteUser()
     {
+        $user_ids = array();
+        $user_ids = array_merge($user_ids,User::inRandomOrder()->limit(3)->get('id')->toArray());
+        
     	$data = [
-    		'user_id' => User::inRandomOrder()->limit(1)->first()->id,
+    		'user_ids' => $user_ids,
     	];
+        
     	$response = $this->call('POST','v1/users/delete',$data)->getContent();
     	$response = json_decode($response);
         
