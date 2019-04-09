@@ -21,7 +21,6 @@ abstract class BaseFormRequest extends FormRequest
     {
         $errors = $validator->errors()->getMessages();
         reset($errors);
-        // throw new ValidationException($validator,new Response(json_encode(['message' => $errors[key($errors)]]), 422));
         throw new ValidationException($validator,json_encode(['message' => $errors[key($errors)]]));
     }
 }

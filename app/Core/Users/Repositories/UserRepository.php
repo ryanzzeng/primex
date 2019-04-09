@@ -15,18 +15,30 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class UserRepository extends BaseRepository implements UserRepositoryInterface
 {
+    /**
+     * UserRepository constructor.
+     * @param User $user
+     */
     public function __construct(User $user)
     {
         parent::__construct($user);
         $this->model = $user;
     }
 
+    /**
+     * @param int $perPage
+     * @return LengthAwarePaginator
+     */
     public function listUsers(int $perPage = 10):LengthAwarePaginator
     {
         $list = User::with(['role:id,name'])->paginate($perPage);
         return $list;
     }
 
+    /**
+     * @param array $params
+     * @return User
+     */
     public function createUser(array $params):User
     {
         try{
@@ -40,6 +52,11 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
         }
     }
 
+    /**
+     * @param array $params
+     * @param int $id
+     * @return bool
+     */
     public function updateUser(array $params, int $id) : bool
     {
         try{
@@ -53,6 +70,10 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
         return true;
     }
 
+    /**
+     * @param int $id
+     * @return bool
+     */
     public function deleteUser(int $id):bool
     {
         try{
@@ -63,6 +84,10 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
         return true;
     }
 
+    /**
+     * @param int $id
+     * @return Collection
+     */
     public function showUser(int $id):Collection
     {
         return User::with(['role:id,name'])->whereId($id)->get();

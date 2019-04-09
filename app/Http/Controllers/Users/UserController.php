@@ -24,6 +24,10 @@ class UserController extends Controller
         $this->UserRepo = $UserRepository;
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function list(Request $request)
     {
         $perPage = $request->get('perPage', 10);
@@ -31,12 +35,20 @@ class UserController extends Controller
         return HttpResponse::success(array($users), 'List users successfully!');
     }
 
+    /**
+     * @param CreateUserRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function create(CreateUserRequest $request)
     {
         $user = $this->UserRepo->createUser($request->all());
         return HttpResponse::success(array($user), 'Create user successfully!');
     }
 
+    /**
+     * @param UpdateUserRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function update(UpdateUserRequest $request)
     {
         $status = $this->UserRepo->updateUser($request->all(),$request->user_id);
@@ -47,6 +59,10 @@ class UserController extends Controller
         return HttpResponse::success($data, 'Update user successfully!');
     }
 
+    /**
+     * @param GeneralUserRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function delete(GeneralUserRequest $request)
     {
         $status = $this->UserRepo->deleteUser($request->user_id);
@@ -57,6 +73,10 @@ class UserController extends Controller
         return HttpResponse::success($data, 'Delete user successfully!');
     }
 
+    /**
+     * @param GeneralUserRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function show(GeneralUserRequest $request)
     {
         $user = $this->UserRepo->showUser($request->user_id);

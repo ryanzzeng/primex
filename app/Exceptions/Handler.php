@@ -55,7 +55,7 @@ class Handler extends ExceptionHandler
         ];
 
         if ($exception instanceof UserInvalidArgumentException) {
-            throw HttpResponse::fail(40001, $data);
+            throw HttpResponse::fail(40001, $data,$exception->getMessage());
         }
 
         if($exception instanceof ValidationException){
@@ -63,7 +63,7 @@ class Handler extends ExceptionHandler
         }
 
         if($exception instanceof NotFoundHttpException){
-            throw HttpResponse::fail(40401,$data);
+            throw HttpResponse::fail(40401,$data,$exception->getMessage());
         }
 
         if ($exception instanceof HttpResponseException) {
